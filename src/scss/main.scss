@@ -1,0 +1,24 @@
+:root {
+	--body: #f2f3f7;
+	--text: #191919;
+
+	--main: white;
+	--textOnMain: var(--text);
+	--border: #e5e5e5;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--body: #191919;
+		--text: white;
+
+		--main: black;
+		--border: #4c4c4c
+	}
+}
+
+body {
+	margin: 0;
+	background: var(--body);
+	color: var(--text);
+}
