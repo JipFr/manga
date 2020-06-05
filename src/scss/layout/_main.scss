@@ -1,0 +1,13 @@
+.contentWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 20px 0;
+
+	.content {
+		width: 90%;
+		max-width: 800px;
+	}
+
+}

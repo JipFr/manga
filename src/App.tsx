@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from "react";
 
-import "./scss/main.scss";
+import Core from "./components/core";
 
 const App: FunctionComponent = (_props) => {
 
 	return (
 		<div className="app">
-			:)
+			<Core />
 		</div>
 	)
 }
