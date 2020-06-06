@@ -8,14 +8,13 @@ import mangasee, { MangaData, loadingState as MangaLoadingState } from "./mangas
 import MobileChapterNavigation from "./components/mobileChapterNavigation";
 
 // Interfaces
-interface ParamInterface extends RouteProps {
+interface ParamInterface {
 	slug?: string;
 	chapter?: string;
-	setProgressState: any;
 }
 
 // Main Chapters view
-const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>> = ({ match }) => {
+const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ match }) => {
 
 	const [mangaData, setMangaData] = useState<MangaData>(MangaLoadingState);
 	// If there is a slug, get the manga's date and set state
@@ -58,10 +57,6 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>> = ({ match
 				let pageIndex = pages.indexOf(focused) + 1;
 				let percentage = pageIndex / pages.length;
 				console.log(pageIndex, pages.length, Math.floor(percentage * 100) + "%");
-				// setProgressState({
-				// 	pageIndex,
-				// 	pages
-				// })
 			}
 
 		})
