@@ -54,14 +54,13 @@
 }
 
 // Chapter-specific
-
 .chapterWrapper {
 	display: grid;
 	grid-template-columns: 100%;
 	grid-template-rows: 1fr;
 	place-items: center;
 	grid-gap: 10px;
-	height: calc(100vh - 50px);
+	height: calc(100vh - 50px - env(safe-area-inset-bottom));
 
 	.chapterImages {
 		height: 100%;

@@ -82,13 +82,15 @@ body {
 		}
 		// Main / core (bigger) card
 		& > .contentCard:nth-child(2) {
-			border-top: 0;
-			padding-top: 0;
-
 			.description {
 				display: none;
 			}
 		}
+	}
+
+	.mobileUndoBorder {
+		border-top: 0;
+		padding-top: 0;
 	}
 
 	.chapters {
