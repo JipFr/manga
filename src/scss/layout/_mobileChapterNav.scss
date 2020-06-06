@@ -1,18 +1,53 @@
 .mobileChapterNav {
+	box-sizing: border-box;
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	height: 50px;
+	height: calc(50px + env(safe-area-inset-bottom));
 	background: var(--main);
-	padding-bottom: env(save-area-inset-bottom);
-	justify-content: space-around;
+	padding: 0 20px;
+	padding-bottom: env(safe-area-inset-bottom);
 	align-items: center;
 	display: none;
+	grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
+	grid-gap: 20px;
+
+	.chapterQuickLink {
+		box-sizing: border-box;
+		padding: 5px;
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		width: 100%;
+		color: var(--textOnMain);
+		display: grid;
+		place-items: center;
+		text-decoration: none;
+
+		span {
+			grid-area: text;
+		}
+		svg {
+			grid-area: icon;
+		}
+
+		&.nextLink {
+			grid-template-columns: auto 24px;
+			grid-template-areas: "text icon";
+		}
+
+		&.previousLink {
+			grid-template-columns: 24px auto;
+			grid-template-areas: "icon text";
+		}
+
+	}
+
 }
 
 @media screen and (max-width: 700px) {
 	.mobileChapterNav {
-		display: flex;
+		// display: flex;
+		display: grid;
 	}
 	.chapterWrapper {
 		grid-template-rows: 1fr 50px;

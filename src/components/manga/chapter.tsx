@@ -1,7 +1,6 @@
 // React imports
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
-import { RouteProps } from "react-router-dom";
 
 // Custom imports
 import mangasee, { MangaData, loadingState as MangaLoadingState } from "./mangasee";
@@ -29,8 +28,7 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 					chapter: Number(chapter)
 				}).then(data => {
 					// Compare data
-					if(data.slug !== mangaData.slug) {
-						console.log(data, mangaData);
+					if(data.slug !== mangaData.slug || data.current?.chapter !== mangaData.current?.chapter) {
 						// Set data
 						setMangaData(data);
 					};
@@ -63,13 +61,24 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 	});
 
 
-	document.querySelector(".chapterImages")?.scrollTo(0, 0)
+	document.querySelector(".chapterImages")?.scrollTo(0, 0);
+
+	let { current, chapters } = mangaData;
+	// Get next chapter for navigation
+	let nextChapter = chapters.find(obj => obj.chapter === (current?.chapter || 0) + 1 && obj.index === current?.index) ?? null;
+	if(!nextChapter) nextChapter = chapters.find(obj => obj.index === (current?.index || 0) + 1) ?? null;
+
+	// Get previous chapter for navigation
+	let previousChapter = chapters.find(obj => obj.chapter === (current?.chapter || 0) - 1 && obj.index === current?.index) ?? null;
+	// Array is reversed because it is iniatally sorted from smallest to greatest.
+	// We want the reverse of that.
+	if(!previousChapter) previousChapter = chapters.reverse().find(obj => obj.index === (current?.index || 0) - 1) ?? null;
 
 	// Return component (obviously)
 	return (
 		<div className="content contentFullWidth">
 			<div className="chapterWrapper">
-				<MobileChapterNavigation />
+				<MobileChapterNavigation nextChapter={nextChapter} previousChapter={previousChapter} />
 				<div className="chapterImages">
 					{mangaData.current?.sources.map((src, i) => {
 						return <img key={i} loading="lazy" className="page" src={src} alt={"Page " + (i + 1).toString()} />

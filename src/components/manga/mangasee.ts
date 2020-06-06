@@ -1,18 +1,19 @@
 
 // Interfaces
+export interface Chapter {
+	datetime: string;
+	label: string;
+	slug: string;
+	chapter: number;
+	index: number;
+	combined: number;
+}
 export interface MangaData {
 	slug: string;
 	title: string | null;
 	description: string | null;
 	poster: string | null;
-	chapters: {
-		datetime: string;
-		label: string;
-		slug: string;
-		chapter: number;
-		index: number;
-		combined: number;
-	}[];
+	chapters: Chapter[];
 	current?: {
 		chapter: number;
 		index: number;
