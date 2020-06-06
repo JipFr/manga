@@ -2,6 +2,8 @@
 	--body: #f2f3f7;
 	--text: #191919;
 
+	--logo: #2999FB;
+
 	--main: white;
 	--textOnMain: var(--text);
 	--border: #e5e5e5;
@@ -23,17 +25,83 @@ body {
 	margin: 0;
 	background: var(--body);
 	color: var(--text);
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.contentCard {
+	box-sizing: border-box;
+	border-radius: 0;
+	background: var(--main);
+	padding: 40px;
+	box-shadow: 0 0 3px var(--shadow);
+	border-top: 5px solid var(--logo);
 }
 
 @import "layout/main.scss";
 @import "layout/header.scss";
 @import "layout/sidebar.scss";
+@import "manga.scss";
 
-.bodyWrapper {
-	width: 100%;
-
-	&.mainLayout {
-		display: grid;
-		grid-template-columns: 250px 1fr;
+@media screen and (max-width: 700px) {
+	// Main layout
+	aside.sidebarWrapper {
+		display: none;
 	}
+	.bodyWrapper.mainLayout {
+		grid-template-columns: 100%;
+	}
+
+	.contentWrapper .content, .contentWrapper .content:not(.contentFullWidth) {
+		width: 100%;
+	}
+
+	// Manga
+	.mangaDetails {
+		grid-template-columns: 100%;
+		grid-gap: 0;
+
+		.contentCard:not(.fwDoPadding)  {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		.contentCard {
+			box-shadow: none;
+		}
+
+		// Small card
+		& > .contentCard:nth-child(1) {
+			position: initial;
+			border-bottom: 0;
+			padding-bottom: 0;
+
+			.description {
+				display: block;
+				padding: 0;
+			}
+		}
+		// Main / core (bigger) card
+		& > .contentCard:nth-child(2) {
+			border-top: 0;
+			padding-top: 0;
+
+			.description {
+				display: none;
+			}
+		}
+	}
+
+	.chapters {
+		border: 0;
+	}
+
+	// This is so things can still have a layout
+	.fwDoPadding {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+	.chapterLink.fwDoPadding {
+		padding: 15px 40px;
+	}
+
 }

@@ -1,0 +1,89 @@
+
+// Layout
+.mangaDetails {
+	display: grid;
+	grid-template-columns: 300px 1fr;
+	grid-gap: 20px;
+
+	.contentCard.small {
+		display: inline-table; // This works...
+		position: sticky;
+		top: $headerHeight + 20px;
+		.title {
+			margin-bottom: 0;
+		}
+		.description {
+			display: none;
+		}
+	}
+
+	.mangaPoster {
+		width: 100%;
+		box-sizing: border-box;
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		display: block;
+	}
+
+}
+.mangaDetails .contentCard {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-gap: 30px;
+}
+
+// Chapters
+.chapters {
+	border: 1px solid var(--border);
+}
+.chapterLink {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+	text-decoration: none;
+	color: inherit;
+	transition: background 100ms;
+
+	&+ .chapterLink {
+		border-top: 1px solid var(--border);
+	}
+}
+.chapterLink:hover {
+	background: var(--border);
+}
+
+// Chapter-specific
+
+.chapterWrapper {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 1fr;
+	place-items: center;
+	grid-gap: 10px;
+	height: calc(100vh - 50px);
+
+	.chapterImages {
+		height: 100%;
+		max-height: 100%;
+		display: flex;
+		flex-wrap: nowrap;
+		max-width: 100vw;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		.page {
+			scroll-snap-align: start;
+		}
+	}
+
+}
+
+	// Pages
+.page {
+	min-width: 100%;
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}

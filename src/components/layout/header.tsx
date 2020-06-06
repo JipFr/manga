@@ -5,7 +5,7 @@ import React, { FunctionComponent } from "react";
 const Header: FunctionComponent = (_props) => {
 	return (
 		<header>
-			:))
+			<img className="logo" src="https://via.placeholder.com/300x150.png/09f/fff?text=LOGO" alt="Logo" />
 		</header>
 	)
 }
