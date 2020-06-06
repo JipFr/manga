@@ -31,15 +31,16 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 					if(data.slug !== mangaData.slug || data.current?.chapter !== mangaData.current?.chapter) {
 						// Set data
 						setMangaData(data);
+						// Reset X scrolling position for image viewer
+						document.querySelector(".chapterImages")?.scrollTo(0, 0);
 					};
 				});
 			}
 		}
 	});
 
-	// Reset X scrolling position for image viewer
 	useEffect(() => {
-		document.querySelector(".chapterImages")?.scrollTo(0, 0);
+		// Update page counter
 		document.querySelector(".chapterImages")?.addEventListener("scroll", () => {
 			// Get all page elements
 			let pages = Array.from(document.querySelectorAll(".chapterImages .page"));
@@ -59,9 +60,6 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 
 		})
 	});
-
-
-	document.querySelector(".chapterImages")?.scrollTo(0, 0);
 
 	let { current, chapters } = mangaData;
 	// Get next chapter for navigation
