@@ -11,6 +11,7 @@
 	display: none;
 	grid-template-columns: 1fr auto 1fr;
 	grid-gap: 10px;
+	font-variant-numeric: tabular-nums;
 
 	.chapterQuickLink {
 		box-sizing: border-box;
