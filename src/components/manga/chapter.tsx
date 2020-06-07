@@ -11,6 +11,10 @@ interface ParamInterface {
 	slug?: string;
 	chapter?: string;
 }
+export interface ProgressData {
+	page: number;
+	of: number;
+}
 
 // Main Chapters view
 const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ match }) => {
@@ -37,28 +41,6 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 				});
 			}
 		}
-	});
-
-	useEffect(() => {
-		// Update page counter
-		document.querySelector(".chapterImages")?.addEventListener("scroll", () => {
-			// Get all page elements
-			let pages = Array.from(document.querySelectorAll(".chapterImages .page"));
-			// Find one closest to the left side of the screen
-			let focused = pages.reduce((closest, current) => {
-				let curPos = current.getBoundingClientRect().left;
-				if(!closest || Math.abs(curPos) < Math.abs(closest.getBoundingClientRect().left)) return current;
-				return closest;
-			}, document.querySelector(".chapterImages .page"));
-
-			if(focused) {
-				// Get index of focused element
-				let pageIndex = pages.indexOf(focused) + 1;
-				let percentage = pageIndex / pages.length;
-				console.log(pageIndex, pages.length, Math.floor(percentage * 100) + "%");
-			}
-
-		})
 	});
 
 	let { current, chapters } = mangaData;
