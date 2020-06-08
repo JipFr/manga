@@ -57,28 +57,33 @@
 }
 
 // Chapter-specific
-.chapterWrapper .loading {
-	width: 100%;
-	height: 200px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.chapterWrapper {
 
-	svg {
-		transform: scale(0.8);
+	.loading {
+		width: 100%;
+		height: 200px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		svg {
+			transform: scale(0.8);
+		}
 	}
 
-}
-.chapterWrapper .chapterImages {
-
-	display: flex;
-	flex-wrap: nowrap;
-	place-items: center;
-	max-width: 100vw;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-	.page {
-		scroll-snap-align: start;
+	.chapterImages {
+		display: flex;
+		flex-wrap: nowrap;
+		place-items: center;
+		max-width: 100vw;
+		min-height: 200px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		background: var(--main);
+	
+		.page {
+			scroll-snap-align: start;
+		}
 	}
 
 }

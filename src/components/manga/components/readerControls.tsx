@@ -1,6 +1,5 @@
 // React imports
 import React, { FunctionComponent } from "react";
-import { Link } from "react-router-dom";
 
 // SCSS imports
 import "../../../scss/_readerControls.scss";
