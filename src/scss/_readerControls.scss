@@ -1,15 +1,30 @@
 
-.readerControls, .chapterImages {
+.readerControls {
 	border-bottom: 1px solid var(--border);
 	border-top: 1px solid var(--border);
 }
 
 .readerControls {
 	padding: 15px 40px;
-	margin-bottom: 20px;
-	margin-top: 20px;
+	margin: 20px 0;
 	box-shadow: none;
 }
-.chapterImages {
-	margin-bottom: 20px;
+
+@media screen  and (min-width: 701px) {
+	.readerControls {
+		width: 90%;
+		max-width: 700px;
+		border-radius: 4px;
+		margin: 20px auto;
+		border: 1px solid var(--border);
+	}
+}
+@media screen and (max-width: 700px) {
+	.chapterImages {
+		border-bottom: 1px solid var(--border);
+		border-top: 1px solid var(--border);
+	}
+	.chapterImages {
+		margin-bottom: 20px;
+	}
 }

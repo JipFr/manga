@@ -33,9 +33,6 @@
 }
 
 // Chapters
-.chapterWrapper {
-	padding-bottom: calc(50px + env(safe-area-inset-bottom));
-}
 .chapters {
 	border: 1px solid var(--border);
 }
@@ -79,7 +76,6 @@
 		min-height: 200px;
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
-		background: var(--main);
 	
 		.page {
 			scroll-snap-align: start;
@@ -96,12 +92,17 @@
 	max-width: 100%;
 	height: 100%;
 	object-fit: contain;
-	// 50px times 2. Header & footer
 	max-height: calc(100vh - 50px);
 }
 
 @media screen and (max-width: 700px) {
 	.page {
 		max-height: calc(100vh - 50px - 50px);
+	}
+	.chapterImages {
+		background: var(--main);
+	}
+	.chapterWrapper {
+		padding-bottom: calc(50px + env(safe-area-inset-bottom));
 	}
 }
