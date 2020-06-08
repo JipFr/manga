@@ -5,6 +5,7 @@ import { RouteComponentProps } from "react-router";
 // Custom imports
 import mangasee, { MangaData, loadingState as MangaLoadingState } from "./mangasee";
 import MobileChapterNavigation from "./components/mobileChapterNavigation";
+import ReaderControls from "./components/readerControls";
 
 // Interfaces
 interface ParamInterface {
@@ -66,6 +67,7 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 		<div className="content contentFullWidth">
 			<div className="chapterWrapper">
 				<MobileChapterNavigation mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
+				<ReaderControls />
 				<div className="chapterImages">
 					{mangaData.current?.sources.length === 0 ? <div className="loading">
 						<svg width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="#2999fb" strokeWidth="2" r="8" strokeDasharray="37.69911184307752 14.566370614359172" transform="rotate(126.259 50 50)"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg>

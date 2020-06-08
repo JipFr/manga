@@ -47,7 +47,7 @@ const Chapters: FunctionComponent<RouteComponentProps<ParamInterface>> = ({ matc
 							{DescriptionDiv}
 						</div>
 				</div>
-				<div className="contentCard mobileUndoBorder">
+				<div className="contentCard mobileUndoBorder mobileUndoPadding">
 					<div className="mangaInfoTop">
 						{DescriptionDiv}
 					</div>

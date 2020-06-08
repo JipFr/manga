@@ -33,6 +33,9 @@
 }
 
 // Chapters
+.chapterWrapper {
+	padding-bottom: calc(50px + env(safe-area-inset-bottom));
+}
 .chapters {
 	border: 1px solid var(--border);
 }
@@ -94,6 +97,6 @@
 
 @media screen and (max-width: 700px) {
 	.page {
-		max-height: calc(100vh - 50px - 50px - env(safe-area-inset-bottom));
+		max-height: calc(100vh - 50px - 50px);
 	}
 }
