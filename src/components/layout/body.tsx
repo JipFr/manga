@@ -11,9 +11,7 @@ const Body: FunctionComponent = (_props) => {
 
 	return (
 		<>
-			<aside className="sidebarWrapper">
-				<Sidebar />
-			</aside>
+			<Sidebar />
 			<div className="contentWrapper">
 				<Route exact path="/:slug" component={Manga.Chapters} />
 				<Route exact path="/:slug/:chapter/" render={(props) => <Manga.Chapter {...props} />}  />

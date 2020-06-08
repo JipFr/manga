@@ -7,13 +7,14 @@ header {
 	border-top: env(safe-area-inset-top) solid transparent;
 	background: var(--main);
 	color: var(--textOnMain);
-	box-shadow: 0 0 3px var(--shadow);
+	// box-shadow: 0 0 3px var(--shadow);
 	z-index: 20;
 	position: fixed;
 	top: 0;
 	left: 0;
 	box-sizing: border-box;
 	padding: 5px 20px;
+	border-bottom: 1px solid var(--border);
 
 	.logo {
 		height: 100%;

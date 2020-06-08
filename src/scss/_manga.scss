@@ -54,35 +54,34 @@
 }
 
 // Chapter-specific
-.chapterWrapper {
-	display: grid;
-	grid-template-columns: 100%;
-	grid-template-rows: 1fr;
-	place-items: center;
-	grid-gap: 10px;
-	height: calc(100vh - 50px - env(safe-area-inset-bottom));
+.chapterWrapper .chapterImages {
 
-	.chapterImages {
-		height: 100%;
-		max-height: 100%;
-		display: flex;
-		flex-wrap: nowrap;
-		max-width: 100vw;
-		overflow-x: auto;
-		scroll-snap-type: x mandatory;
-		.page {
-			scroll-snap-align: start;
-		}
+	display: flex;
+	flex-wrap: nowrap;
+	place-items: center;
+	max-width: 100vw;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	.page {
+		scroll-snap-align: start;
 	}
 
 }
 
 // Pages
 .page {
-	min-width: 100%;
+	box-sizing: border-box;
 	width: 100%;
-	height: 100%;
+	min-width: 100%;
 	max-width: 100%;
-	max-height: 100%;
+	height: 100%;
 	object-fit: contain;
+	// 50px times 2. Header & footer
+	max-height: calc(100vh - 50px);
+}
+
+@media screen and (max-width: 700px) {
+	.page {
+		max-height: calc(100vh - 50px - 50px - env(safe-area-inset-bottom));
+	}
 }
