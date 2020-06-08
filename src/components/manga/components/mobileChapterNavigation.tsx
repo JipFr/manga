@@ -12,19 +12,26 @@ import { ProgressData } from "../chapter";
 // Component
 const MobileChapterNavigation: FunctionComponent<{
 	nextChapter: Chapter | null,
-	previousChapter: Chapter | null
-}> = ({ nextChapter, previousChapter }) => {
+	previousChapter: Chapter | null,
+	mangaData: any
+}> = ({ nextChapter, previousChapter, mangaData }) => {
 
 	const [progress, setProgress] = useState<ProgressData>({
 		page: 0,
 		of: 0
 	});
 
+	const setLoadState = () => {
+		let tmp = mangaData.data;
+		tmp.current.sources = [];
+		mangaData.set(tmp);
+	}
+
 	let nextButton = <div></div>;
 	let previousButton = <div></div>;
 	if(nextChapter) {
 		nextButton = (
-			<Link className="chapterQuickLink nextLink" to={nextChapter.slug}>
+			<Link onClick={setLoadState} className="chapterQuickLink nextLink" to={nextChapter.slug}>
 				<span>Chapter {nextChapter.chapter}</span>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
 			</Link>
@@ -32,7 +39,7 @@ const MobileChapterNavigation: FunctionComponent<{
 	}
 	if(previousChapter) {
 		previousButton = (
-			<Link className="chapterQuickLink previousLink" to={previousChapter.slug}>
+			<Link onClick={setLoadState} className="chapterQuickLink previousLink" to={previousChapter.slug}>
 				<span>Chapter {previousChapter.chapter}</span>
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
 			</Link>

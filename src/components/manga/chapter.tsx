@@ -55,14 +55,21 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 	if(!previousChapter) previousChapter = chapters.reverse().find(obj => obj.index === (current?.index || 0) - 1) ?? null;
 
 	// Return component (obviously)
+	let manga = {
+		set: setMangaData,
+		data: mangaData
+	}
+	let imagesDiv = mangaData.current?.sources.map((src, i) => {
+		return <img key={i} loading="lazy" className="page" src={src} alt={"Page " + (i + 1).toString()} />
+	});
 	return (
 		<div className="content contentFullWidth">
 			<div className="chapterWrapper">
-				<MobileChapterNavigation nextChapter={nextChapter} previousChapter={previousChapter} />
+				<MobileChapterNavigation mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
 				<div className="chapterImages">
-					{mangaData.current?.sources.map((src, i) => {
-						return <img key={i} loading="lazy" className="page" src={src} alt={"Page " + (i + 1).toString()} />
-					})}
+					{mangaData.current?.sources.length === 0 ? <div className="loading">
+						<svg width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="#2999fb" strokeWidth="2" r="8" strokeDasharray="37.69911184307752 14.566370614359172" transform="rotate(126.259 50 50)"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg>
+					</div> : imagesDiv}
 				</div>
 			</div>
 		</div>

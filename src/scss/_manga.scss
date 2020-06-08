@@ -54,6 +54,18 @@
 }
 
 // Chapter-specific
+.chapterWrapper .loading {
+	width: 100%;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		transform: scale(0.8);
+	}
+
+}
 .chapterWrapper .chapterImages {
 
 	display: flex;
