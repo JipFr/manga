@@ -20,6 +20,7 @@
 }
 @media screen and (max-width: 700px) {
 	.chapterImages {
+		margin-top: -1px;
 		border-bottom: 1px solid var(--border);
 		border-top: 1px solid var(--border);
 	}
