@@ -120,7 +120,7 @@
 	.chapterWrapper {
 		padding-top: 0;
 		// 50 is footer height, env is control thing height, 20 is just padding
-		padding-bottom: calc(50px + env(safe-area-inset-bottom) + 20px);
+		padding-bottom: calc(50px + 20px + env(safe-area-inset-bottom));
 		grid-template-areas: 
 		  "images"
 		  "controls";
