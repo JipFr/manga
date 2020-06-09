@@ -6,7 +6,6 @@
 
 .readerControls {
 	padding: 15px 40px;
-	margin: 20px 0;
 	box-shadow: none;
 }
 
@@ -15,7 +14,7 @@
 		width: 90%;
 		max-width: 700px;
 		border-radius: 4px;
-		margin: 20px auto;
+		margin: auto;
 		border: 1px solid var(--border);
 	}
 }
@@ -23,8 +22,5 @@
 	.chapterImages {
 		border-bottom: 1px solid var(--border);
 		border-top: 1px solid var(--border);
-	}
-	.chapterImages {
-		margin-bottom: 20px;
 	}
 }
