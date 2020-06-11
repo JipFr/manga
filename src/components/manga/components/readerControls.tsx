@@ -17,7 +17,7 @@ const ReaderControls: FunctionComponent<ReaderControlsProps> = (_props) => {
 	return (
 		<settingsContext.Consumer>
 			{ctx => {
-				let [settings, setSetting] = ctx;
+				let { settings, setSetting } = ctx;
 
 				const toggleHorizontal = (e:any) => {
 					setSetting("horizontalReader", e.target.checked);

@@ -6,11 +6,18 @@ interface Settings {
 	horizontalReader: boolean;
 	[key: string]: any;
 }
+interface ContextType {
+	settings: Settings,
+	setSetting: (key: string, value: any) => void
+}
 const defaultSettings: Settings = {
 	horizontalReader: true,
 	i: 1
 }
-const settingsContext = React.createContext<[any, any]>([defaultSettings, () => {}]);
+const settingsContext = React.createContext<ContextType>({
+	settings: defaultSettings,
+	setSetting: () => {}
+});
 
 // Main components
 const SettingsProvider: FunctionComponent = ({ children }) => {
@@ -38,7 +45,7 @@ const SettingsProvider: FunctionComponent = ({ children }) => {
 	}
 	
 	return (
-		<settingsContext.Provider value={[settings, setSetting]}>
+		<settingsContext.Provider value={{settings, setSetting}}>
 			{children}
 		</settingsContext.Provider>
 	)

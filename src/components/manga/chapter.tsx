@@ -74,7 +74,7 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 		<settingsContext.Consumer>
 			{ctx => {
 				// Ctx is the settingsContext value
-				let [settings, setSetting] = ctx;
+				let { settings, setSetting } = ctx;
 				let horizontalReader = !!settings.horizontalReader;
 				return (
 					<>
