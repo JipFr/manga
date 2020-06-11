@@ -56,7 +56,6 @@ const MobileChapterNavigation: FunctionComponent<{
 			if(closest) {
 				let curPos =  isHorizontal ? current.getBoundingClientRect().left : current.getBoundingClientRect().top;
 				let closestPos = isHorizontal ? closest.getBoundingClientRect().left : closest.getBoundingClientRect().top;
-				console.log(curPos);
 				if(!closest || Math.abs(curPos) < Math.abs(closestPos ?? 0)) return current;
 			}
 			return closest;

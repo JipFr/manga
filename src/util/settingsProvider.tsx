@@ -1,5 +1,5 @@
 // React import
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useEffect, useContext } from "react";
 
 // Configure settings context
 interface Settings {
@@ -10,42 +10,35 @@ const defaultSettings: Settings = {
 	horizontalReader: true,
 	i: 1
 }
-const settingsContext = React.createContext(defaultSettings);
-let settings = defaultSettings;
-try {
-	let ls = localStorage.getItem("readerSettings");
-	if(ls) {
-		settings = {
-			...settings,
-			...JSON.parse(ls)
-		};
-	} else {
-		settings = defaultSettings;
-	}
-} catch(e) {
-	// :/
-	settings = defaultSettings;
-}
-
-/**
- * Update field in settings
- */
-settings.updateSetting = (key: string, value: any) => {
-	settings[key] = value;
-	localStorage.setItem("readerSettings", JSON.stringify(settings));
-}
-
-setInterval(() => {
-	settings.updateSetting("i", settings.i + 1);
-}, 2e3);
-
-localStorage.setItem("readerSettings", JSON.stringify(settings));
+const settingsContext = React.createContext<[any, any]>([defaultSettings, () => {}]);
 
 // Main components
 const SettingsProvider: FunctionComponent = ({ children }) => {
+
+	let usableSettings = defaultSettings;
+	try {
+		let ls = localStorage.getItem("readerSettings");
+		if(ls) {
+			usableSettings = {
+				...usableSettings,
+				...JSON.parse(ls)
+			}
+		}
+	} catch(e) {
+		// Nothing for now...
+	}
+
+	let [settings, setSettingFunction] = useState<any>(usableSettings);
+
+	let setSetting = (key: string, value: any) => {
+		setSettingFunction({
+			[key]: value
+		});
+		localStorage.setItem("readerSettings", JSON.stringify(settings));
+	}
 	
 	return (
-		<settingsContext.Provider value={settings}>
+		<settingsContext.Provider value={[settings, setSetting]}>
 			{children}
 		</settingsContext.Provider>
 	)

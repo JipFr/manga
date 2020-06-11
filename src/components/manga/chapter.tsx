@@ -25,14 +25,17 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 	// If there is a slug, get the manga's date and set state
 	useEffect(() => {
 		let params = match.params;
+
 		if(params.chapter && typeof params.chapter === "string") {
 			let [index, chapter] = params.chapter.split("-");
 			if(params?.slug) {
+
 				// Get data
 				mangasee(params.slug, {
 					index: Number(index),
 					chapter: Number(chapter)
 				}).then(data => {
+
 					// Compare data
 					if(data.slug !== mangaData.slug || data.current?.chapter !== mangaData.current?.chapter) {
 						// Set data
@@ -40,9 +43,12 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 						// Reset X scrolling position for image viewer
 						document.querySelector(".chapterImages")?.scrollTo(0, 0);
 					};
+
 				});
+
 			}
 		}
+
 	});
 
 	let { current, chapters } = mangaData;
@@ -68,13 +74,13 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 		<settingsContext.Consumer>
 			{ctx => {
 				// Ctx is the settingsContext value
-				console.log(ctx);
-				let horizontalReader = !!ctx.horizontalReader;
+				let [settings, setSetting] = ctx;
+				let horizontalReader = !!settings.horizontalReader;
 				return (
 					<>
 						<MobileChapterNavigation isHorizontal={horizontalReader} mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
 						<div className="content contentFullWidth">
-								{ctx.i}
+							{settings.i}
 							<div className="chapterWrapper" data-horizontal={horizontalReader}>
 								<ReaderControls />
 								<div className={"chapterImages" + (mangaData.current?.sources.length === 0 ? " loading" : "")}>
