@@ -7,6 +7,12 @@
 .readerControls {
 	padding: 15px 40px;
 	box-shadow: none;
+
+	.title {
+		margin: 0;
+		margin-bottom: 10px;
+	}
+
 }
 
 @media screen  and (min-width: 701px) {

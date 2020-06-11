@@ -1,5 +1,5 @@
 // React import
-import React, { FunctionComponent, useState, useEffect, useContext } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 
 // Configure settings context
 interface Settings {
@@ -11,8 +11,7 @@ interface ContextType {
 	setSetting: (key: string, value: any) => void
 }
 const defaultSettings: Settings = {
-	horizontalReader: true,
-	i: 1
+	horizontalReader: true
 }
 const settingsContext = React.createContext<ContextType>({
 	settings: defaultSettings,
@@ -41,8 +40,12 @@ const SettingsProvider: FunctionComponent = ({ children }) => {
 		setSettingFunction({
 			[key]: value
 		});
-		localStorage.setItem("readerSettings", JSON.stringify(settings));
 	}
+
+	useEffect(() => {
+		// Store settings
+		localStorage.setItem("readerSettings", JSON.stringify(settings));
+	});
 	
 	return (
 		<settingsContext.Provider value={{settings, setSetting}}>

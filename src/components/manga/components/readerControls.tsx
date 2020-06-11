@@ -16,24 +16,28 @@ interface ReaderControlsProps {
 const ReaderControls: FunctionComponent<ReaderControlsProps> = (_props) => {
 	return (
 		<settingsContext.Consumer>
-			{ctx => {
-				let { settings, setSetting } = ctx;
-
-				const toggleHorizontal = (e:any) => {
-					setSetting("horizontalReader", e.target.checked);
-				}
-
-				return (
-					<div className="readerControls contentCard mobileUndoBorder">
-						Controls
-						<div className="settingsDiv">
-							<input checked={settings.horizontalReader} onChange={toggleHorizontal} type="checkbox" id="horizontalReader" />
-							<label>Horizontal reader</label>
-						</div>
-					</div>
-				)
-			}}
+			{ReaderControlsInner}
 		</settingsContext.Consumer>
+	)
+}
+
+function ReaderControlsInner(ctx: any) {
+	let { settings, setSetting } = ctx;
+
+	const toggleHorizontal = (e:any) => {
+		window.scrollTo(0, 0);
+		console.log(e);
+		setSetting("horizontalReader", e.target.checked);
+	}
+
+	return (
+		<div className="readerControls contentCard mobileUndoBorder">
+			<h2 className="title">Settings</h2>
+			<div className="settingsDiv">
+				<input checked={settings.horizontalReader} onChange={toggleHorizontal} type="checkbox" id="horizontalReader" />
+				<label>Horizontal reader</label>
+			</div>
+		</div>
 	)
 }
 
