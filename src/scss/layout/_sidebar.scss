@@ -1,15 +1,13 @@
 aside.sidebarWrapper {
 	box-sizing: border-box;
 	padding: 30px 0;
-	min-height: calc(100vh - 50px);
+	height: calc(100vh - 50px);
 	position: sticky;
 	top: 50px;
-	box-shadow: 1px 0 3px var(--shadow);
-	display: contents;
+	border-right: 1px solid var(--border);
+	background: var(--main);
 } 
 .sidebar {
 	box-sizing: border-box;
-	background: var(--main);
 	width: 100%;
-	height: 100%;
 }

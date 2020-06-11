@@ -3,6 +3,7 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 
 // Custom imports
+import { settingsContext } from "../../util/settingsProvider";
 import mangasee, { MangaData, loadingState as MangaLoadingState } from "./mangasee";
 import MobileChapterNavigation from "./components/mobileChapterNavigation";
 import ReaderControls from "./components/readerControls";
@@ -64,17 +65,29 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 		return <img key={i} loading="lazy" className="page" src={src} alt={"Page " + (i + 1).toString()} />
 	});
 	return (
-		<div className="content contentFullWidth">
-			<div className="chapterWrapper">
-				<MobileChapterNavigation mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
-				<ReaderControls />
-				<div className="chapterImages">
-					{mangaData.current?.sources.length === 0 ? <div className="loading">
-						<svg width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="#2999fb" strokeWidth="2" r="8" strokeDasharray="37.69911184307752 14.566370614359172" transform="rotate(126.259 50 50)"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg>
-					</div> : imagesDiv}
-				</div>
-			</div>
-		</div>
+		<settingsContext.Consumer>
+			{ctx => {
+				// Ctx is the settingsContext value
+				console.log(ctx);
+				let horizontalReader = !!ctx.horizontalReader;
+				return (
+					<>
+						<MobileChapterNavigation isHorizontal={horizontalReader} mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
+						<div className="content contentFullWidth">
+								{ctx.i}
+							<div className="chapterWrapper" data-horizontal={horizontalReader}>
+								<ReaderControls />
+								<div className={"chapterImages" + (mangaData.current?.sources.length === 0 ? " loading" : "")}>
+									{mangaData.current?.sources.length === 0 ? <div className="loading">
+										<svg width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><circle cx="50" cy="50" fill="none" stroke="#2999fb" strokeWidth="2" r="8" strokeDasharray="37.69911184307752 14.566370614359172" transform="rotate(126.259 50 50)"><animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform></circle></svg>
+									</div> : imagesDiv}
+								</div>
+							</div>
+						</div>
+					</>
+				)
+			}}
+		</settingsContext.Consumer>
 	)
 }
 

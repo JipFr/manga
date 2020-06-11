@@ -3,6 +3,7 @@ import React, { FunctionComponent } from "react";
 import { Route } from "react-router-dom";
 
 // Component imports
+import { SettingsProvider } from "../../util/settingsProvider";
 import Sidebar from "../sidebar";
 import Manga from "../manga";
 
@@ -10,7 +11,7 @@ import Manga from "../manga";
 const Body: FunctionComponent = (_props) => {
 
 	return (
-		<>
+		<SettingsProvider>
 			<aside className="sidebarWrapper">
 				<Sidebar />
 			</aside>
@@ -18,7 +19,7 @@ const Body: FunctionComponent = (_props) => {
 				<Route exact path="/:slug" component={Manga.Chapters} />
 				<Route exact path="/:slug/:chapter/" render={(props) => <Manga.Chapter {...props} />}  />
 			</div>
-		</>
+		</SettingsProvider>
 	)
 }
 

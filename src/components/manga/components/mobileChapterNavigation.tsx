@@ -13,8 +13,9 @@ import { ProgressData } from "../chapter";
 const MobileChapterNavigation: FunctionComponent<{
 	nextChapter: Chapter | null,
 	previousChapter: Chapter | null,
-	mangaData: any
-}> = ({ nextChapter, previousChapter, mangaData }) => {
+	mangaData: any,
+	isHorizontal: boolean
+}> = ({ nextChapter, previousChapter, mangaData, isHorizontal }) => {
 
 	const [progress, setProgress] = useState<ProgressData>({
 		page: 0,
@@ -51,8 +52,8 @@ const MobileChapterNavigation: FunctionComponent<{
 		let pages = Array.from(document.querySelectorAll(".chapterImages .page"));
 		// Find one closest to the left side of the screen
 		let focused = pages.reduce((closest, current) => {
-			let curPos = current.getBoundingClientRect().left;
-			if(!closest || Math.abs(curPos) < Math.abs(closest.getBoundingClientRect().left)) return current;
+			let curPos = isHorizontal ? current.getBoundingClientRect().left : current.getBoundingClientRect().top;
+			if(!closest || Math.abs(curPos) < Math.abs(isHorizontal ? closest.getBoundingClientRect().left : closest.getBoundingClientRect().top)) return current;
 			return closest;
 		}, document.querySelector(".chapterImages .page"));
 
