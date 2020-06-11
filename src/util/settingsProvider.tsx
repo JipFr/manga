@@ -11,7 +11,8 @@ interface ContextType {
 	setSetting: (key: string, value: any) => void
 }
 const defaultSettings: Settings = {
-	horizontalReader: true
+	horizontalReader: true,
+	invertImages: false
 }
 const settingsContext = React.createContext<ContextType>({
 	settings: defaultSettings,
@@ -38,6 +39,7 @@ const SettingsProvider: FunctionComponent = ({ children }) => {
 
 	let setSetting = (key: string, value: any) => {
 		setSettingFunction({
+			...settings,
 			[key]: value
 		});
 	}

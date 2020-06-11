@@ -72,15 +72,16 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 	});
 	return (
 		<settingsContext.Consumer>
-			{ctx => {
-				// Ctx is the settingsContext value
-				let { settings } = ctx;
+			{({ settings }) => {
+				// `settings` come from the ctx value
 				let horizontalReader = !!settings.horizontalReader;
+				let invertImages = !!settings.invertImages;
+				console.log(invertImages);
 				return (
 					<>
 						<MobileChapterNavigation isHorizontal={horizontalReader} mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
 						<div className="content contentFullWidth">
-							<div className="chapterWrapper" data-horizontal={horizontalReader}>
+							<div className="chapterWrapper" data-horizontal={horizontalReader} data-invert-images={invertImages}>
 								<ReaderControls />
 								<div className={"chapterImages" + (mangaData.current?.sources.length === 0 ? " loading" : "")}>
 									{mangaData.current?.sources.length === 0 ? <div className="loading">

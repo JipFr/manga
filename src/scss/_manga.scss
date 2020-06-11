@@ -138,3 +138,10 @@
 
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.chapterWrapper[data-invert-images="true"] img.page {
+		// Some people might like this as a "dark mode"?
+		filter: invert(1);
+	}
+}
