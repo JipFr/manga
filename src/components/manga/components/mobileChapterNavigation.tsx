@@ -52,9 +52,15 @@ const MobileChapterNavigation: FunctionComponent<{
 		let pages = Array.from(document.querySelectorAll(".chapterImages .page"));
 		// Find one closest to the left side of the screen
 		let focused = pages.reduce((closest, current) => {
-			let curPos = isHorizontal ? current.getBoundingClientRect().left : current.getBoundingClientRect().top;
-			if(!closest || Math.abs(curPos) < Math.abs(isHorizontal ? closest.getBoundingClientRect().left : closest.getBoundingClientRect().top)) return current;
+			
+			if(closest) {
+				let curPos =  isHorizontal ? current.getBoundingClientRect().left : current.getBoundingClientRect().top;
+				let closestPos = isHorizontal ? closest.getBoundingClientRect().left : closest.getBoundingClientRect().top;
+				console.log(curPos);
+				if(!closest || Math.abs(curPos) < Math.abs(closestPos ?? 0)) return current;
+			}
 			return closest;
+
 		}, document.querySelector(".chapterImages .page"));
 
 		if(focused) {
@@ -77,7 +83,7 @@ const MobileChapterNavigation: FunctionComponent<{
 	useEffect(() => {
 		// Update page counter
 		let debounceScroll: NodeJS.Timeout | undefined;
-		document.querySelector(".chapterImages")?.addEventListener("scroll", () => {
+		let runScrollDebounce = () => {
 			if(debounceScroll) {
 				clearTimeout(debounceScroll);
 				debounceScroll = undefined;
@@ -87,7 +93,13 @@ const MobileChapterNavigation: FunctionComponent<{
 				updatePages();
 			}, 50);
 
-		});
+		}
+		if(isHorizontal) {
+			document.querySelector(".chapterImages")?.addEventListener("scroll", runScrollDebounce);
+		} else {
+			document.addEventListener("scroll", runScrollDebounce);
+		}
+		
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
