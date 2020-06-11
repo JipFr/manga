@@ -1,14 +1,13 @@
 // React imports
-import React, { FunctionComponent, useEffect, useState, useContext } from "react";
+import React, { FunctionComponent, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 // SCSS imports
 import "../../../scss/layout/_mobileChapterNav.scss";
 
 // Custom imports
-import { StateContext, StateWrapperProvider } from "../../../util/generalStateWrapper";
+import { StateContext } from "../../../util/generalStateWrapper";
 import { Chapter } from "../mangasee";
-import { ProgressData } from "../chapter";
 
 // Component
 const MobileChapterNavigation: FunctionComponent<{
@@ -18,12 +17,7 @@ const MobileChapterNavigation: FunctionComponent<{
 	isHorizontal: boolean
 }> = ({ nextChapter, previousChapter, mangaData, isHorizontal }) => {
 
-	console.log(useContext(StateContext));
-
-	const [progress, setProgress] = useState<ProgressData>({
-		page: 0,
-		of: 0
-	});
+	let { wrapperState, setWrapperState } = useContext(StateContext);
 
 	const setLoadState = () => {
 		let tmp = mangaData.data;
@@ -53,7 +47,8 @@ const MobileChapterNavigation: FunctionComponent<{
 	const updatePages = () => {
 		// Get all page elements
 		let pages = Array.from(document.querySelectorAll(".chapterImages .page"));
-		// Find one closest to the left side of the screen
+		// Find one closest to the relevant side of the screen
+		// Note: relevant side = left if horizontal, top if manga reader is verit
 		let focused = pages.reduce((closest, current) => {
 			
 			if(closest) {
@@ -68,14 +63,14 @@ const MobileChapterNavigation: FunctionComponent<{
 		if(focused) {
 			// Get index of focused element
 			let pageIndex = pages.indexOf(focused) + 1;
-			// let percentage = pageIndex / pages.length;
-			// console.log(pageIndex, pages.length, Math.floor(percentage * 100) + "%");
-			if(progress.page !== pageIndex || progress.of !== pages.length) {
+			if(wrapperState.progress?.page !== pageIndex || wrapperState.progress?.of !== pages.length) {
 				// Now debounce time out to set state
-				setProgress({
-					page: pageIndex,
-					of: pages.length
-				});
+				setWrapperState({
+					progress: {
+						page: pageIndex,
+						of: pages.length
+					}
+				})
 			}
 		}
 
@@ -108,7 +103,7 @@ const MobileChapterNavigation: FunctionComponent<{
 	return (
 		<nav className="mobileChapterNav">
 			{previousButton}
-			<span>{progress.page} of {progress.of}</span>
+			<span>{wrapperState?.progress?.page ?? "0"} of {wrapperState?.progress?.of ?? "0"}</span>
 			{nextButton}
 		</nav>
 	)

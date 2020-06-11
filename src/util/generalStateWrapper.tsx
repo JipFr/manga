@@ -2,7 +2,20 @@
 import React, { FunctionComponent, useState } from "react";
 
 // Configure context
-const StateContext = React.createContext({});
+interface ContextType {
+	wrapperState: {
+		[key: string]: any;
+	};
+	setWrapperState: (newKeys: {
+		[key: string]: any
+	}) => void
+}
+const StateContext = React.createContext<ContextType>({
+	wrapperState: {},
+	setWrapperState: (newKeys: {
+		[key: string]: any
+	}) => {}
+});
 
 // Main components
 const StateWrapperProvider: FunctionComponent = ({ children }) => {
