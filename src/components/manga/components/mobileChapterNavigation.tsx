@@ -1,11 +1,12 @@
 // React imports
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 // SCSS imports
 import "../../../scss/layout/_mobileChapterNav.scss";
 
 // Custom imports
+import { StateContext, StateWrapperProvider } from "../../../util/generalStateWrapper";
 import { Chapter } from "../mangasee";
 import { ProgressData } from "../chapter";
 
@@ -16,6 +17,8 @@ const MobileChapterNavigation: FunctionComponent<{
 	mangaData: any,
 	isHorizontal: boolean
 }> = ({ nextChapter, previousChapter, mangaData, isHorizontal }) => {
+
+	console.log(useContext(StateContext));
 
 	const [progress, setProgress] = useState<ProgressData>({
 		page: 0,
