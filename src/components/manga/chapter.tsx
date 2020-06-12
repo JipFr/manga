@@ -1,9 +1,10 @@
 // React imports
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect, useContext } from "react";
 import { RouteComponentProps } from "react-router";
 
 // Custom imports
 import { settingsContext } from "../../util/settingsProvider";
+import { StateContext } from "../../util/generalStateWrapper";
 import mangasee, { MangaData, loadingState as MangaLoadingState } from "./mangasee";
 import MobileChapterNavigation from "./components/mobileChapterNavigation";
 import ReaderControls from "./components/readerControls";
@@ -22,6 +23,8 @@ export interface ProgressData {
 const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ match }) => {
 
 	const [mangaData, setMangaData] = useState<MangaData>(MangaLoadingState);
+	let { setWrapperState } = useContext(StateContext);
+
 	// If there is a slug, get the manga's date and set state
 	useEffect(() => {
 		let params = match.params;
@@ -42,6 +45,11 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 						setMangaData(data);
 						// Reset X scrolling position for image viewer
 						document.querySelector(".chapterImages")?.scrollTo(0, 0);
+
+						setWrapperState({
+							manga: data
+						});
+
 					};
 
 				});
@@ -77,6 +85,7 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 		</>	
 	)
 	if(mangaData.current?.sources.length === 0) {
+		// Empty state handler
 		imagesDiv = (
 			<div className="empty">
 				No sources were found for this chapter.

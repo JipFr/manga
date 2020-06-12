@@ -25,10 +25,13 @@ const StateWrapperProvider: FunctionComponent = ({ children }) => {
 	let setWrapperState = (newKeys: {
 		[key: string]: any
 	}) => {
-		setWrapperStateFunction({
+		console.log(newKeys);
+		let newObj = {
 			...wrapperState,
 			...newKeys
-		});
+		}
+		console.log(newObj);
+		setWrapperStateFunction(newObj);
 	}
 	
 	return (
