@@ -65,6 +65,8 @@ const MobileChapterNavigation: FunctionComponent<{
 			let pageIndex = pages.indexOf(focused) + 1;
 			if(wrapperState.progress?.page !== pageIndex || wrapperState.progress?.of !== pages.length) {
 				// Now debounce time out to set state
+				console.log("_".repeat(15));
+				console.log(wrapperState);
 				setWrapperState({
 					progress: {
 						page: pageIndex,

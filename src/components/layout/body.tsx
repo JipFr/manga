@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import { SettingsProvider } from "../../util/settingsProvider";
 import { StateWrapperProvider } from "../../util/generalStateWrapper";
 import Sidebar from "../sidebar";
+import DesktopSidebar from "../desktopSidebar";
 import Manga from "../manga";
 
 /** Body component. used in Core component below the header */
@@ -15,6 +16,7 @@ const Body: FunctionComponent = (_props) => {
 		<SettingsProvider>
 			<StateWrapperProvider>
 				<aside className="sidebarWrapper">
+					<DesktopSidebar />
 					<Sidebar />
 				</aside>
 				<div className="contentWrapper">

@@ -20,12 +20,12 @@ const StateWrapperProvider: FunctionComponent = ({ children }) => {
 	let [wrapperState, setWrapperStateFunction] = useState({});
 
 	let setWrapperState = (newKeys: AnyObj) => {
-		console.log(newKeys);
+		console.log(wrapperState);
 		let newObj = {
 			...wrapperState,
 			...newKeys
 		}
-		console.log(newObj);
+		// console.log(newObj);
 		setWrapperStateFunction(newObj);
 	}
 	
