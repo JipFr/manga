@@ -1,22 +1,39 @@
 
 // Interfaces
 export interface Chapter {
+	/** Assigned datatime on mangasee */
 	datetime: string;
+	/** Label, for example "Chapter 1" */
 	label: string;
+	/** Slug, for example /Fire-Brigade-Of-Flames/1-0/ */
 	slug: string;
+	/** Current chapter index. For example, 1 */
 	chapter: number;
+	/** Current chapter's season */
 	index: number;
+	/** Combined value from index & chapter, easily usable for sorting */
 	combined: number;
 }
 export interface MangaData {
+	/** Is MangaData still loading? */
+	loading: boolean;
+	/** Manga's slug, for example Fire-Brigade-Of-Flames */
 	slug: string;
+	/** Manga's title. "Fire Force" for example  */
 	title: string | null;
+	/** Manga's description, varying lengths */
 	description: string | null;
+	/** Manga's poster URL. `null  if not found*/
 	poster: string | null;
+	/** Array of chapters */
 	chapters: Chapter[];
+	/** Requested data */
 	current?: {
+		/** Request chapter number */
 		chapter: number;
+		/** Request season */
 		index: number;
+		/** Array of image sources */
 		sources: string[];
 	}
 }
@@ -28,6 +45,7 @@ interface Options {
 
 // Useful helpers
 const loadingState = {
+	loading: true,
 	title: "Loading...",
 	description: "",
 	poster: "",
@@ -57,9 +75,12 @@ async function mangasee(slug: string, opts: Options = { index: 1 }): Promise<Man
 	div.innerHTML = string;
 
 	// Get data from HTML
-	let poster = (div.querySelector(".leftImage img") as HTMLImageElement).src;
-	let title = div.querySelector(".SeriesName")?.textContent;
-	let description = div.querySelector(".description")?.textContent;
+	let poster: string | null = null;
+	let posterEl = div.querySelector<HTMLImageElement>(".leftImage img");
+	if(posterEl) poster = posterEl.src;
+
+	let title = div.querySelector(".SeriesName")?.textContent ?? "Manga not found."; 
+	let description = div.querySelector(".description")?.textContent ?? "If you see this page, that means the manga wasn't found. Sorry about that.";
 
 		// Get chapter data
 	let chapterLinks = Array.from(div.querySelectorAll(".list.chapter-list > a")) as HTMLAnchorElement[];
@@ -120,7 +141,8 @@ async function mangasee(slug: string, opts: Options = { index: 1 }): Promise<Man
 		poster, // Poster's element is HTMLImageElement so no null there
 		chapters: chapters.sort((a, b) => a.combined - b.combined),
 		slug,
-		current
+		current,
+		loading: false
 	};
 
 }

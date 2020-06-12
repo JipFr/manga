@@ -18,6 +18,9 @@ const Body: FunctionComponent = (_props) => {
 					<Sidebar />
 				</aside>
 				<div className="contentWrapper">
+					<Route exact path="/">
+						<p style={{margin: "80px 0"}}>Home page</p>
+					</Route>
 					<Route exact path="/:slug" component={Manga.Chapters} />
 					<Route exact path="/:slug/:chapter/" render={(props) => <Manga.Chapter {...props} />}  />
 				</div>
