@@ -22,6 +22,7 @@ const MobileChapterNavigation: FunctionComponent<{
 	const setLoadState = () => {
 		let tmp = mangaData.data;
 		tmp.current.sources = [];
+		tmp.loading = true;
 		mangaData.set(tmp);
 	}
 
@@ -101,6 +102,18 @@ const MobileChapterNavigation: FunctionComponent<{
 		
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		// @ts-ignore
+		if((nextChapter || previousChapter) && ((nextChapter && nextChapter.slug !== wrapperState.navigationLinks?.nextChapter.slug) || ((previousChapter && previousChapter.slug !== wrapperState.navigationLinks?.previousChapter.slug)))) {
+			setWrapperState({
+				navigationLinks: {
+					nextChapter,
+					previousChapter
+				}
+			});
+		}
+	});
 
 	return (
 		<nav className="mobileChapterNav">

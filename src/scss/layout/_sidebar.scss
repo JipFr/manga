@@ -11,3 +11,19 @@ aside.sidebarWrapper {
 	box-sizing: border-box;
 	width: 100%;
 }
+
+.sideProgress {
+	padding: 0 20px;
+
+	.sideNavigation {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 10px;
+	}
+
+	.pageProgress {
+		margin-bottom: 10px;
+		text-align: center;
+	}
+
+}
