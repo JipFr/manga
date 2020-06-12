@@ -2,19 +2,16 @@
 import React, { FunctionComponent, useState } from "react";
 
 // Configure context
+interface AnyObj {
+	[key: string]: any;
+}
 interface ContextType {
-	wrapperState: {
-		[key: string]: any;
-	};
-	setWrapperState: (newKeys: {
-		[key: string]: any
-	}) => void
+	wrapperState: AnyObj;
+	setWrapperState: (newKeys: AnyObj) => void
 }
 const StateContext = React.createContext<ContextType>({
 	wrapperState: {},
-	setWrapperState: (newKeys: {
-		[key: string]: any
-	}) => {}
+	setWrapperState: (newKeys: AnyObj) => {}
 });
 
 // Main components
@@ -22,9 +19,7 @@ const StateWrapperProvider: FunctionComponent = ({ children }) => {
 
 	let [wrapperState, setWrapperStateFunction] = useState({});
 
-	let setWrapperState = (newKeys: {
-		[key: string]: any
-	}) => {
+	let setWrapperState = (newKeys: AnyObj) => {
 		console.log(newKeys);
 		let newObj = {
 			...wrapperState,
