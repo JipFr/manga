@@ -105,7 +105,7 @@ const MobileChapterNavigation: FunctionComponent<{
 
 	useEffect(() => {
 		// @ts-ignore
-		if((nextChapter || previousChapter) && ((nextChapter && nextChapter.slug !== wrapperState.navigationLinks?.nextChapter.slug) || ((previousChapter && previousChapter.slug !== wrapperState.navigationLinks?.previousChapter.slug)))) {
+		if((nextChapter || previousChapter) && ((nextChapter && nextChapter.slug !== wrapperState.navigationLinks?.nextChapter?.slug) || ((previousChapter && previousChapter.slug !== wrapperState.navigationLinks?.previousChapter?.slug)))) {
 			setWrapperState({
 				navigationLinks: {
 					nextChapter,
