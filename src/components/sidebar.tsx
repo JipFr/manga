@@ -5,7 +5,7 @@ import React, { FunctionComponent } from "react";
 const Sidebar: FunctionComponent = (_props) => {
 	return (
 		<section className="sidebar">
-			{JSON.stringify(_props)}
+			...
 		</section>
 	)
 }

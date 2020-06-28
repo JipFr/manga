@@ -1,9 +1,7 @@
 
-$headerHeight: 50px;
-
 header {
 	width: 100%;
-	height: $headerHeight;
+	height: var(--headerHeight);
 	border-top: env(safe-area-inset-top) solid transparent;
 	background: var(--main);
 	color: var(--textOnMain);
@@ -24,5 +22,5 @@ header {
 }
 
 body {
-	padding-top: $headerHeight;
+	padding-top: var(--headerHeight);
 }

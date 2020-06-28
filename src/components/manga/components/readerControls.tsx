@@ -1,5 +1,5 @@
 // React imports
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ChangeEvent } from "react";
 
 // Custom imports
 import { settingsContext } from "../../../util/settingsProvider";
@@ -24,13 +24,21 @@ const ReaderControls: FunctionComponent<ReaderControlsProps> = (_props) => {
 function ReaderControlsInner(ctx: any) {
 	let { settings, setSetting } = ctx;
 
-	const toggleHorizontal = (e: any) => {
+	const toggleHorizontal = (e: ChangeEvent<HTMLInputElement>) => {
 		window.scrollTo(0, 0);
 		setSetting("horizontalReader", e.target.checked);
 	}
 
-	const toggleImageInvert = (e: any) => {
+	const toggleImageInvert = (e: ChangeEvent<HTMLInputElement>) => {
 		setSetting("invertImages", e.target.checked);
+	}
+
+	const toggleMaxHeight = (e: ChangeEvent<HTMLInputElement>) => {
+		setSetting("imageMaxHeight", e.target.checked);
+	}
+
+	const toggleReaderGap = (e: ChangeEvent<HTMLInputElement>) => {
+		setSetting("hideReaderGap", e.target.checked);
 	}
 
 	return (
@@ -43,6 +51,14 @@ function ReaderControlsInner(ctx: any) {
 			<div className="settingsDiv">
 				<input checked={settings.invertImages} onChange={toggleImageInvert} type="checkbox" id="invertImages" />
 				<label>Invert images in dark mode</label>
+			</div>
+			<div className="settingsDiv">
+				<input checked={settings.imageMaxHeight} onChange={toggleMaxHeight} type="checkbox" id="imageMaxHeight" />
+				<label>Don't fit image on screen</label>
+			</div>
+			<div className="settingsDiv">
+				<input checked={settings.hideReaderGap} onChange={toggleReaderGap} type="checkbox" id="readerGap" />
+				<label>Hide gap in vertical reader</label>
 			</div>
 		</div>
 	)
