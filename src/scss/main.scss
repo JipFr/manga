@@ -8,6 +8,9 @@
 	--textOnMain: var(--text);
 	--border: #e5e5e5;
 	--shadow: rgba(0, 0, 0, 0.05);
+
+	// Layout stuff
+	--headerHeight: 50px;
 }
 
 @media (prefers-color-scheme: dark) {

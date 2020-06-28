@@ -75,23 +75,6 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 		set: setMangaData,
 		data: mangaData
 	}
-	
-	// Define imagesdiv
-	let imagesDiv = (
-		<>
-			{mangaData.current?.sources.map((src, i) => {
-				return <img key={i} loading="lazy" className="page" src={src} alt={"Page " + (i + 1).toString()} />
-			})}
-		</>	
-	)
-	if(mangaData.current?.sources.length === 0) {
-		// Empty state handler
-		imagesDiv = (
-			<div className="empty">
-				No sources were found for this chapter.
-			</div>
-		)
-	}
 
 	// Final component return
 	return (
@@ -100,12 +83,32 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 				// `settings` come from the ctx value
 				let horizontalReader = !!settings.horizontalReader;
 				let invertImages = !!settings.invertImages;
+				let imageMaxHeight = !!settings.imageMaxHeight;
+				let hideGap = !!settings.hideReaderGap;
+
+				// Define imagesdiv
+				let imagesDiv = (
+					<>
+						{mangaData.current?.sources.map((src, i) => {
+							return <img key={i} loading="lazy" className={`page ${imageMaxHeight ? "noMaxHeight" : ""}`.trim()} src={src} alt={"Page " + (i + 1).toString()} />
+						})}
+					</>	
+				)
+				if(mangaData.current?.sources.length === 0) {
+					// Empty state handler
+					imagesDiv = (
+						<div className="empty">
+							No sources were found for this chapter.
+						</div>
+					)
+				}
+
 				console.log(invertImages);
 				return (
 					<>
 						<MobileChapterNavigation isHorizontal={horizontalReader} mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
 						<div className="content contentFullWidth">
-							<div className="chapterWrapper" data-horizontal={horizontalReader} data-invert-images={invertImages}>
+							<div className="chapterWrapper" data-hide-gap={hideGap} data-horizontal={horizontalReader} data-invert-images={invertImages}>
 								<ReaderControls />
 								<div className={"chapterImages" + (mangaData.current?.sources.length === 0 ? " loading" : "")}>
 									{mangaData.loading ? <div className="loading">
