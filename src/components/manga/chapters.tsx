@@ -23,7 +23,6 @@ const Chapters: FunctionComponent<RouteComponentProps<ParamInterface>> = ({ matc
 			mangasee(params.slug).then(data => {
 				// Compare data
 				if(data.slug !== mangaData.slug) {
-					console.log(data.slug, mangaData);
 					setMangaData(data)
 				};
 			});

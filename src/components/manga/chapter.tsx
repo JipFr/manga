@@ -103,7 +103,6 @@ const Chapter: FunctionComponent<RouteComponentProps<ParamInterface>>  = ({ matc
 					)
 				}
 
-				console.log(invertImages);
 				return (
 					<>
 						<MobileChapterNavigation isHorizontal={horizontalReader} mangaData={manga} nextChapter={nextChapter} previousChapter={previousChapter} />
